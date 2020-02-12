@@ -1,0 +1,5 @@
+ADH|SBAL3	AUGUSTUS	gene	2463	16615	1	-	.	gene_id "Adh";
+GPI|SBAL3	AUGUSTUS	gene	41	14991	1	+	.	gene_id "Gpi";
+PGM|SBAL3	AUGUSTUS	gene	1	4875	1	-	.	gene_id "Pgm";
+SOD|SBAL3	AUGUSTUS	gene	1976	34030	1	+	.	gene_id "Sod";
+MPI|SBAL3	AUGUSTUS	gene	4896	9100	1	+	.	gene_id "Mpi";
