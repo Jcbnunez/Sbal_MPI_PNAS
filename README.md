@@ -1,0 +1,1 @@
+# This a repo for JCB Nunez et al's paper: Footprints of natural selection at the mannose-6-phospate isomerase locus in barnacles 
