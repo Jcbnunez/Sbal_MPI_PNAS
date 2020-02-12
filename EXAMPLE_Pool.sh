@@ -1,18 +1,3 @@
-#!/bin/bash
-
-#SBATCH -J UKW_pool_alloz
-#SBATCH -n 6
-#SBATCH --mem=120GB
-#SBATCH -t 60:00:00
-
-#########################################################
-#########################################################
-#########################################################
-
-####################
-#LOAD OSCAR MODULES#
-####################
-
 module load bwa/0.7.15 #Align reads
 module load samtools/1.9 # Manipulate SAM/BAM files
 module load bcftools/1.9

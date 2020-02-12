@@ -1,37 +1,3 @@
-#!/bin/bash
-
-#SBATCH -J HISAT2_LowB_RNAexp
-#SBATCH -n 12
-#SBATCH --mem=120GB
-#SBATCH -t 30:00:00
-
-#########################################################
-#########################################################
-
-##############
-#SYSTEM CHECK#
-##############
-echo "-----------------------------"
-echo ">>>>The current folder is<<<<"
-pwd
-echo ">>>>Operating System Information<<<<"
-uname -a
-echo ">>>>I/O Information<<<<"
-ulimit -a
-echo ">>>>Computing Node is<<<<"
-hostname
-echo ">>>>Domain Name is<<<<"
-domainname
-echo ">>>>System DNS is<<<<"
-dnsdomainname
-echo "-----------------------------"
-
-#########################################################
-
-####################
-#LOAD OSCAR MODULES#
-####################
-
 module load hisat2/2.1.0 #Align reads
 module load samtools/1.9 # Manipulate SAM/BAM files
 module load bcftools/1.9
@@ -76,37 +42,37 @@ reference=~/data/S_balanoides_genomics_resources/Analyses/MPI_paper/4.DNA_RNA_AA
 echo "Starting Process ..."
 date
 
-#-##Index reference
-#-#hisat2-build $reference MPI_ref
-#-#
-#-## call SNPs with sam tools
-#-## the --dta flag is mandatory for differential expression analysis
-#-#hisat2 -x MPI_ref -1 $F -2 $R -p $CPU --dta -S $ProjectName.sam
-#-#
-#-## Raw mapping statistics
-#-#samtools flagstat --threads $CPU $ProjectName.sam > flagstats_raw_$ProjectName.txt
-#-#
-#-## reformat to Bam
-#-#samtools view -q $QUAL -F 0x0004 --threads $CPU -b $ProjectName.sam > flt.$ProjectName.bam
-#-#
-#-## Remove non-mapping reads, fix paired SAM flags added by BWA
-#-#samtools flagstat --threads $CPU flt.$ProjectName.bam > flagstats_filter_$ProjectName.txt
-#-#
-#-## Sort with picard(DNA/RNA)
-#-#java -Xmx$JAVAMEM -jar $PICARD SortSam I=flt.$ProjectName.bam O=flt.srt.$ProjectName.bam SO=coordinate VALIDATION_STRINGENCY=SILENT
-#-#
-#-##flagstats
-#-#samtools flagstat --threads $CPU flt.srt.$ProjectName.bam > flagstats_final_$ProjectName.txt
-#-#
-#-##index
-#-#samtools index flt.srt.$ProjectName.bam
-#-#
-#-##Quality Check
-#-#$qualimap bamqc -bam flt.srt.$ProjectName.bam  -outdir ./Qualimap_$ProjectName --java-mem-size=$JAVAMEM
-#-#
-#-#rm $ProjectName.sam 
-#-#rm $ProjectName.bam
-#-#rm flt.$ProjectName.bam
+#Index reference
+hisat2-build $reference MPI_ref
+
+# call SNPs with sam tools
+# the --dta flag is mandatory for differential expression analysis
+hisat2 -x MPI_ref -1 $F -2 $R -p $CPU --dta -S $ProjectName.sam
+
+# Raw mapping statistics
+samtools flagstat --threads $CPU $ProjectName.sam > flagstats_raw_$ProjectName.txt
+
+# reformat to Bam
+samtools view -q $QUAL -F 0x0004 --threads $CPU -b $ProjectName.sam > flt.$ProjectName.bam
+
+# Remove non-mapping reads, fix paired SAM flags added by BWA
+samtools flagstat --threads $CPU flt.$ProjectName.bam > flagstats_filter_$ProjectName.txt
+
+# Sort with picard(DNA/RNA)
+java -Xmx$JAVAMEM -jar $PICARD SortSam I=flt.$ProjectName.bam O=flt.srt.$ProjectName.bam SO=coordinate VALIDATION_STRINGENCY=SILENT
+
+#flagstats
+samtools flagstat --threads $CPU flt.srt.$ProjectName.bam > flagstats_final_$ProjectName.txt
+
+#index
+samtools index flt.srt.$ProjectName.bam
+
+#Quality Check
+$qualimap bamqc -bam flt.srt.$ProjectName.bam  -outdir ./Qualimap_$ProjectName --java-mem-size=$JAVAMEM
+
+rm $ProjectName.sam 
+rm $ProjectName.bam
+rm flt.$ProjectName.bam
 
 ###########################
 #Begin SNP calling to VCF #
