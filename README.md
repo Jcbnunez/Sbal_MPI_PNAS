@@ -1,4 +1,4 @@
-# This a repo for JCB Nunez et al's paper: Footprints of natural selection at the mannose-6-phospate isomerase locus in barnacles 
+# Data for **Footprints of natural selection at the mannose-6-phospate isomerase locus in barnacles** 
 
 # Accesing the data
 ## All HTS Illumina libraries can be found, and downloaded from here:
