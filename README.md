@@ -1,5 +1,11 @@
 # Data for **Footprints of natural selection at the mannose-6-phospate isomerase locus in barnacles** 
 
+Joaquin C. B. Nunez, Patrick A. Flight, Kimberly B. Neil, Stephen Ronga, Leif A. Eriksson, David A. Ferranti, Magnus Alm Rosenblad, Anders Blomberg, and David M. Randa
+
+# Contact
+joaquin_nunez@brown.edu
+david_rand@brown.edu
+
 # Accesing the data
 ## All HTS Illumina libraries can be found, and downloaded from here:
 https://www.ncbi.nlm.nih.gov/bioproject/PRJNA544445
